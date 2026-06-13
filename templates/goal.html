@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="card narrow form-card">
+  <p class="eyebrow">Step 1 of 2</p>
+  <h2>What do you want to improve first?</h2>
+  <p class="lead">Choose one focus area now. You can add more later after your first result.</p>
+
+  <form method="post" class="form tidy-form">
+    {% for area in focus_areas %}
+      <label class="choice">
+        <input type="radio" name="focus_area" value="{{ area }}" required>
+        <span>{{ area }}</span>
+      </label>
+    {% endfor %}
+    <button type="submit">Continue</button>
+  </form>
+</section>
+{% endblock %}

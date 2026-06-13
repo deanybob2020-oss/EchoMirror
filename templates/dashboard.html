@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="dashboard-shell">
+  {% if current %}
+    <article class="card spotlight">
+      <p class="eyebrow">Current experiment</p>
+      <h2>{{ current.experiment.name }}</h2>
+      <p class="status-pill">Active</p>
+      <p class="lead">{{ current.start_date }} to {{ current.end_date }}</p>
+
+      {% if progress %}
+        <div class="progress-row">
+          <div class="progress-track" aria-label="experiment progress">
+            <span class="progress-fill" style="width: {{ progress.pct }}%;"></span>
+          </div>
+          <p class="progress-meta">Day {{ progress.elapsed_days }} / {{ progress.total_days }} · {{ progress.days_left }} day(s) left</p>
+        </div>
+      {% endif %}
+
+      <div class="actions">
+        <a class="button" href="{{ url_for('checkin') }}">Log today&apos;s check-in</a>
+        <a class="button ghost" href="{{ url_for('results') }}">View results</a>
+      </div>
+    </article>
+
+    <div class="grid">
+      <article class="stat">
+        <h3>Check-ins logged</h3>
+        <p class="metric">{{ summary.total if summary else 0 }}</p>
+      </article>
+      <article class="stat">
+        <h3>Followed days</h3>
+        <p class="metric">{{ summary.followed_count if summary else 0 }}</p>
+      </article>
+      <article class="stat">
+        <h3>Not followed days</h3>
+        <p class="metric">{{ summary.not_followed_count if summary else 0 }}</p>
+      </article>
+      <article class="stat">
+        <h3>Confidence</h3>
+        <p class="metric caps">{{ summary.confidence if summary else 'low' }}</p>
+      </article>
+    </div>
+  {% else %}
+    <article class="card spotlight empty-state">
+      <p class="eyebrow">Welcome</p>
+      <h2>You have not started an experiment yet.</h2>
+      <p class="lead">Pick one goal and start your first 7-day test to unlock results.</p>
+      <div class="actions">
+        <a class="button" href="{{ url_for('choose_goal') }}">Choose your goal</a>
+      </div>
+    </article>
+  {% endif %}
+</section>
+{% endblock %}

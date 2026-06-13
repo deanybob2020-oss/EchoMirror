@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="card">
+  <p class="eyebrow">Experiment results</p>
+  <h2>{{ user_experiment.experiment.name }}</h2>
+
+  <div class="grid">
+    <article class="stat">
+      <h3>Average when followed</h3>
+      <p class="metric">{{ '%.2f'|format(summary.avg_followed) if summary.avg_followed is not none else 'N/A' }}</p>
+    </article>
+    <article class="stat">
+      <h3>Average when not followed</h3>
+      <p class="metric">{{ '%.2f'|format(summary.avg_not_followed) if summary.avg_not_followed is not none else 'N/A' }}</p>
+    </article>
+    <article class="stat">
+      <h3>Impact</h3>
+      <p class="metric {{ 'positive' if summary.impact_percent and summary.impact_percent > 0 else '' }}">{{ ('%+.1f'|format(summary.impact_percent)) ~ '%' if summary.impact_percent is not none else 'N/A' }}</p>
+    </article>
+    <article class="stat">
+      <h3>Confidence</h3>
+      <p class="metric caps">{{ summary.confidence }}</p>
+    </article>
+  </div>
+
+  <p class="hint">Confidence uses check-in volume and representation across followed/not-followed days.</p>
+
+  <h3>Score trend</h3>
+  {% if chart_checkins %}
+    <div class="trend-chart" role="img" aria-label="Daily score trend chart">
+      {% for item in chart_checkins %}
+        <div class="trend-col">
+          <div class="trend-bar {{ 'followed' if item.followed_experiment else 'not-followed' }}" style="height: {{ (item.score * 8) + 12 }}%;"></div>
+          <p class="trend-label">D{{ loop.index }}</p>
+        </div>
+      {% endfor %}
+    </div>
+    <div class="legend-row">
+      <span><i class="legend-dot followed"></i> Followed</span>
+      <span><i class="legend-dot not-followed"></i> Not followed</span>
+    </div>
+  {% else %}
+    <p>No chart yet. Add your first check-in to see trend data.</p>
+  {% endif %}
+
+  <h3>Recent check-ins</h3>
+  {% if checkins %}
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Score</th>
+            <th>Followed?</th>
+            <th>Note</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for c in checkins %}
+            <tr>
+              <td>{{ c.checkin_date }}</td>
+              <td>{{ c.score }}</td>
+              <td>{{ 'Yes' if c.followed_experiment else 'No' }}</td>
+              <td>{{ c.note or '-' }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <p>No check-ins yet.</p>
+  {% endif %}
+</section>
+{% endblock %}

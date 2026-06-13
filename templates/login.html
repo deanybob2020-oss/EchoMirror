@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="card narrow form-card">
+  <p class="eyebrow">Welcome back</p>
+  <h2>Log in to Echo Mirror</h2>
+  <p class="lead">Continue your current experiment and keep your daily evidence streak alive.</p>
+
+  <form method="post" class="form tidy-form">
+    <label>Email
+      <input type="email" name="email" required autocomplete="email">
+    </label>
+    <label>Password
+      <input type="password" name="password" required autocomplete="current-password">
+    </label>
+    <button type="submit">Log in</button>
+  </form>
+
+  <p class="helper-text">No account yet? <a href="{{ url_for('register') }}">Create one in under a minute</a>.</p>
+</section>
+{% endblock %}

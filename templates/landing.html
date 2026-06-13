@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="hero-grid">
+  <div class="hero-copy">
+    <p class="eyebrow">Echo Mirror v0.1</p>
+    <h1>Stop guessing. Test what actually works for you.</h1>
+    <p class="lead">Run one 7-day experiment, check in daily, and see evidence from your own data. Build confidence with proof, not motivational noise.</p>
+    <div class="actions">
+      <a class="button" href="{{ url_for('register') }}">Start your first experiment</a>
+      <a class="button ghost" href="{{ url_for('login') }}">I already have an account</a>
+    </div>
+  </div>
+
+  <div class="hero-panel">
+    <h3>What users get in week one</h3>
+    <ul class="clean-list">
+      <li>One focused goal: Energy</li>
+      <li>One testable action for 7 days</li>
+      <li>Daily check-ins in under 30 seconds</li>
+      <li>Clear score comparison with impact insight</li>
+    </ul>
+    <div class="hero-kpis">
+      <article>
+        <p class="kpi-label">Check-in time</p>
+        <p class="kpi-value">30 sec</p>
+      </article>
+      <article>
+        <p class="kpi-label">Experiment length</p>
+        <p class="kpi-value">7 days</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="card landing-section">
+  <h2>How it works</h2>
+  <div class="split cols-3">
+    <article>
+      <p class="step">1</p>
+      <h3>Pick one goal</h3>
+      <p>Start with Energy now and expand later when habits are stable.</p>
+    </article>
+    <article>
+      <p class="step">2</p>
+      <h3>Run one experiment</h3>
+      <p>Test one behavior for 7 days so the signal is clear.</p>
+    </article>
+    <article>
+      <p class="step">3</p>
+      <h3>See your evidence</h3>
+      <p>Compare followed vs not followed scores and quantify impact.</p>
+    </article>
+  </div>
+</section>
+
+<section class="card landing-section">
+  <h2>Why people stick with it</h2>
+  <div class="split cols-2">
+    <article>
+      <h3>No generic advice</h3>
+      <p>Everything is personalized to your behavior and your outcomes.</p>
+    </article>
+    <article>
+      <h3>No overwhelming dashboards</h3>
+      <p>One experiment, one check-in, one clear result at a time.</p>
+    </article>
+    <article>
+      <h3>No guilt cycle</h3>
+      <p>Missed a day? Keep going. The point is learning what helps.</p>
+    </article>
+    <article>
+      <h3>Evidence you can trust</h3>
+      <p>Results are shown with confidence levels so you can interpret cautiously.</p>
+    </article>
+  </div>
+</section>
+
+<section class="card landing-section">
+  <h2>Testimonials</h2>
+  <div class="split cols-3">
+    <blockquote>
+      <p>"I finally stopped guessing and stuck to one useful routine."</p>
+      <cite>Early tester</cite>
+    </blockquote>
+    <blockquote>
+      <p>"Seeing the score difference made me actually care about consistency."</p>
+      <cite>Early tester</cite>
+    </blockquote>
+    <blockquote>
+      <p>"It felt lightweight enough to use daily, not like a full journal."</p>
+      <cite>Early tester</cite>
+    </blockquote>
+  </div>
+</section>
+
+<section class="card landing-section">
+  <h2>FAQ</h2>
+  <div class="faq-list">
+    <article>
+      <h3>How long does one experiment take?</h3>
+      <p>Each test runs for 7 days so you can gather enough signal quickly.</p>
+    </article>
+    <article>
+      <h3>What if I miss a day?</h3>
+      <p>You can still continue. Missed check-ins lower confidence but do not erase progress.</p>
+    </article>
+    <article>
+      <h3>Do I need wearables?</h3>
+      <p>No. This version is intentionally simple and based on your daily scores.</p>
+    </article>
+  </div>
+  <div class="actions">
+    <a class="button" href="{{ url_for('register') }}">Create free account</a>
+  </div>
+</section>
+{% endblock %}

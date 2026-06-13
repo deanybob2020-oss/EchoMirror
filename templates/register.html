@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="card narrow form-card">
+  <p class="eyebrow">Get started</p>
+  <h2>Create your Echo Mirror account</h2>
+  <p class="lead">Run your first 7-day experiment and start measuring what truly improves your day.</p>
+
+  <form method="post" class="form tidy-form">
+    <label>Email
+      <input type="email" name="email" required autocomplete="email">
+    </label>
+    <label>Password
+      <input type="password" name="password" required minlength="6" autocomplete="new-password">
+    </label>
+    <button type="submit">Create account</button>
+  </form>
+
+  <p class="helper-text">Already have an account? <a href="{{ url_for('login') }}">Log in</a>.</p>
+</section>
+{% endblock %}
