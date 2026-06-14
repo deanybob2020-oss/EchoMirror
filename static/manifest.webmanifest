@@ -1,0 +1,24 @@
+{
+  "name": "Echo Mirror",
+  "short_name": "EchoMirror",
+  "description": "Run 7-day experiments and discover what works for you.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f5f9ff",
+  "theme_color": "#0e9f6e",
+  "icons": [
+    {
+      "src": "/static/icons/icon-any.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/static/icons/icon-maskable.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}

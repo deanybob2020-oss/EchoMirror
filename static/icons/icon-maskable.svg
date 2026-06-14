@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title">
+  <title>Echo Mirror</title>
+  <rect width="512" height="512" fill="#0c8d62" />
+  <circle cx="256" cy="256" r="188" fill="#1170ff" />
+  <rect x="158" y="138" width="196" height="236" rx="24" fill="#ffffff" opacity="0.96" />
+  <rect x="176" y="156" width="160" height="200" rx="14" fill="#edf6ff" />
+  <path d="M201 210h110M201 246h90M201 282h64" stroke="#0e9f6e" stroke-width="12" stroke-linecap="round" />
+  <circle cx="298" cy="305" r="27" fill="none" stroke="#1170ff" stroke-width="10" />
+  <path d="M319 326l19 19" stroke="#1170ff" stroke-width="10" stroke-linecap="round" />
+</svg>

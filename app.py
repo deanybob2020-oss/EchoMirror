@@ -20,6 +20,7 @@ from flask import (
     redirect,
     render_template,
     request,
+    send_from_directory,
     session,
     url_for,
 )
@@ -481,6 +482,16 @@ def send_daily_reminder_emails(dry_run: bool = False) -> dict:
                 failed += 1
 
     return {"eligible": len(recipients), "sent": sent, "failed": failed, "dry_run": False}
+
+
+@app.route("/manifest.webmanifest")
+def manifest():
+    return send_from_directory("static", "manifest.webmanifest")
+
+
+@app.route("/sw.js")
+def service_worker():
+    return send_from_directory("static", "sw.js")
 
 
 @app.route("/")
