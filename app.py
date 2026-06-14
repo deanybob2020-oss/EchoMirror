@@ -60,16 +60,48 @@ app.config["DEBUG"] = DEBUG_MODE
 db = SQLAlchemy(app)
 
 FOCUS_AREAS = ["Energy", "Sleep", "Focus", "Stress"]
-ENERGY_EXPERIMENTS = [
-    "Morning walk",
-    "No caffeine after 2pm",
-    "10 minutes morning sunlight",
-    "Drink water before first coffee",
-    "No phone first 30 minutes",
-    "Bed before fixed time",
-    "Protein breakfast",
-    "5-minute afternoon reset",
-]
+EXPERIMENT_CATALOG = {
+    "Energy": [
+        "Morning walk",
+        "No caffeine after 2pm",
+        "10 minutes morning sunlight",
+        "Drink water before first coffee",
+        "No phone first 30 minutes",
+        "Bed before fixed time",
+        "Protein breakfast",
+        "5-minute afternoon reset",
+    ],
+    "Sleep": [
+        "No screens 60 minutes before bed",
+        "Consistent bedtime",
+        "No caffeine after 1pm",
+        "Bedroom cool and dark",
+        "10-minute wind-down routine",
+        "Morning sunlight within 30 minutes",
+        "No heavy meal 2 hours before bed",
+        "Write tomorrow's top task before bed",
+    ],
+    "Focus": [
+        "50-minute deep work block",
+        "Phone in another room",
+        "Single-task first hour",
+        "Top 3 tasks written before work",
+        "No email before noon",
+        "5-minute pre-work planning",
+        "Noise-free work session",
+        "25-minute timer sprint",
+    ],
+    "Stress": [
+        "10-minute walk without phone",
+        "Box breathing for 3 minutes",
+        "No work messages after cutoff",
+        "Write down main worry",
+        "5-minute stretch break",
+        "One protected lunch break",
+        "Evening shutdown routine",
+        "Name 3 things that went well",
+    ],
+}
 
 
 class User(db.Model):
@@ -221,20 +253,30 @@ def results_summary(user_experiment: UserExperiment) -> dict:
 
 
 def seed_experiments() -> None:
-    existing = Experiment.query.count()
-    if existing > 0:
-        return
+    existing_pairs = {
+        (focus_area, name)
+        for focus_area, name in db.session.query(
+            Experiment.focus_area, Experiment.name
+        ).all()
+    }
 
-    for name in ENERGY_EXPERIMENTS:
-        db.session.add(
-            Experiment(
-                focus_area="Energy",
-                name=name,
-                duration_days=7,
-                is_active=True,
+    added_any = False
+    for focus_area, experiment_names in EXPERIMENT_CATALOG.items():
+        for name in experiment_names:
+            if (focus_area, name) in existing_pairs:
+                continue
+            db.session.add(
+                Experiment(
+                    focus_area=focus_area,
+                    name=name,
+                    duration_days=7,
+                    is_active=True,
+                )
             )
-        )
-    db.session.commit()
+            added_any = True
+
+    if added_any:
+        db.session.commit()
 
 
 def completion_subquery():
